@@ -32,6 +32,11 @@
     justify-content: space-between;   
 }
 
+
+.videoFooter__notebooks__list {
+    background: white;
+}
+
 .videoFooter__actionsLeft > .MuiSvgIcon-root{
     padding: 0 10px;
 }

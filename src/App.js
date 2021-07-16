@@ -43,19 +43,15 @@ function Home() {
     fetch("http://localhost:3000/list?user_id=5555")
       .then(res => res.json())
       .then((result) => {
-        console.log('result is: ', result)
         result.forEach(row => {
           reelsList.push({
-            // channel: row.path, 
-            // avatarSrc: row.path, 
-            // song: row.path, 
+            reelId: row.id,
             url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
             // url: row.path,
             likes: row.likes,
             shares: row.views
           });
         });
-        console.log('result is: ', reelsList);
         setReels(reelsList);
       },
         (error) => { console.log('error: ', error) })
@@ -72,8 +68,9 @@ function Home() {
 
       <div className="app__videos">
         {/* Container of app__videos(scrollable content) */}
-        {reels.map(({ channel, avatarSrc, song, url, likes, shares }) => (
+        {reels.map(({ reelId, channel, avatarSrc, song, url, likes, shares }) => (
           <VideoCard
+            reelId={reelId}
             channel={channel}
             avatarSrc={avatarSrc}
             song={song}
@@ -95,19 +92,15 @@ function Search() {
     fetch(`http://localhost:3000/list_hash_tag?hashtag=${value}`)
       .then(res => res.json())
       .then((result) => {
-        console.log('result is: ', result)
         result.forEach(row => {
           hashtagReelsList.push({
-            // channel: row.path, 
-            // avatarSrc: row.path, 
-            // song: row.path, 
+            reelId: row.id,
             url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
             // url: row.path,
             likes: row.likes,
             shares: row.views
           });
         });
-        console.log('result is: ', hashtagReelsList);
         setHashtagReels(hashtagReelsList);
       },
         (error) => { console.log('error: ', error) })
@@ -126,8 +119,9 @@ function Search() {
       {/* Reels Text */}
 
       <div className="search__videos">
-        {hashtagReels.map(({ channel, avatarSrc, song, url, likes, shares }) => (
+        {hashtagReels.map(({ reelId, channel, avatarSrc, song, url, likes, shares }) => (
           <VideoCard
+            reelId={reelId}
             channel={channel}
             avatarSrc={avatarSrc}
             song={song}

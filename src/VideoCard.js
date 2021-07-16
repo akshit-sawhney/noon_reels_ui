@@ -3,7 +3,7 @@ import "./VideoCard.css";
 import VideoHeader from './VideoHeader';
 import VideoFooter from './VideoFooter';
 
-function VideoCard({ url, likes, shares, channel, avatarSrc, song }) {
+function VideoCard({ reelId, url, likes, shares, channel, avatarSrc, song }) {
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const videoRef = useRef(null);
 
@@ -34,6 +34,7 @@ function VideoCard({ url, likes, shares, channel, avatarSrc, song }) {
             <VideoHeader
             />
             <VideoFooter
+             reelId={reelId}
              channel = {channel}
              likes = {likes}
              shares = {shares}
