@@ -5,6 +5,7 @@ import VideoFooter from './VideoFooter';
 
 function VideoCard({ keyId, reelId, url, likes, shares, channel, avatarSrc, song }) {
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+    const [viewsValue, setViewsValue] = useState(shares);
     const videoRef = useRef(null);
 
     const onVideoPress = () =>{
@@ -16,6 +17,21 @@ function VideoCard({ keyId, reelId, url, likes, shares, channel, avatarSrc, song
             //play
             videoRef.current.play()
             setIsVideoPlaying(true)
+            const requestBody = {
+                reel_id: reelId,
+                views: (viewsValue + 1)
+            }
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody)
+            };
+
+            fetch('http://localhost:3000/likes/update_views', requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    setViewsValue(viewsValue + 1);
+                });
         }
     }
     //useState
@@ -37,7 +53,7 @@ function VideoCard({ keyId, reelId, url, likes, shares, channel, avatarSrc, song
              reelId={reelId}
              channel = {channel}
              likes = {likes}
-             shares = {shares}
+             shares = {viewsValue}
              avatarSrc = {avatarSrc}
              song = {song} 
             />
