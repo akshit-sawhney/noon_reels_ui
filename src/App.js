@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SearchField from "react-search-field";
 import './App.css';
 import VideoCard from './VideoCard';
 
@@ -87,7 +88,57 @@ function Home() {
 }
 
 function Search() {
-  return <h2>Search</h2>;
+  const [hashtagReels, setHashtagReels] = useState([]);
+
+  function onChange(value, event) {
+    const hashtagReelsList = [];
+    fetch(`http://localhost:3000/list_hash_tag?hashtag=${value}`)
+      .then(res => res.json())
+      .then((result) => {
+        console.log('result is: ', result)
+        result.forEach(row => {
+          hashtagReelsList.push({
+            // channel: row.path, 
+            // avatarSrc: row.path, 
+            // song: row.path, 
+            url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+            // url: row.path,
+            likes: row.likes,
+            shares: row.views
+          });
+        });
+        console.log('result is: ', hashtagReelsList);
+        setHashtagReels(hashtagReelsList);
+      },
+        (error) => { console.log('error: ', error) })
+  }
+  return (
+    <div className="search">
+      <div className="search__top">
+      <SearchField
+        placeholder="Search..."
+        onChange={onChange}
+        searchText=""
+        classNames="test-class"
+      />
+      </div>
+      {/* image at the top logo     */}
+      {/* Reels Text */}
+
+      <div className="search__videos">
+      {hashtagReels.map(({ channel, avatarSrc, song, url, likes, shares }) => (
+          <VideoCard
+            channel={channel}
+            avatarSrc={avatarSrc}
+            song={song}
+            url={url}
+            likes={likes}
+            shares={shares}
+          />
+        ))}
+      </div>
+    </div>
+  )
 }
 
 function Users() {
