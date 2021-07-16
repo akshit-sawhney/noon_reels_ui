@@ -1,18 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchField from "react-search-field";
 import './VideoFooter.css'
-import { Avatar, Button } from '@material-ui/core';
-import MusicNoteIcon from '@material-ui/icons/MusicNote';
-import Ticker from "react-ticker";
 import BookmarkIcon from '@material-ui/icons/Bookmark';
-import ModeCommentIcon from '@material-ui/icons/ModeComment';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import SendIcon from '@material-ui/icons/Send';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import { findAllByDisplayValue } from '@testing-library/react';
-
-
 
 function VideoFooter({ reelId, channel, song, likes,
     shares, avatarSrc }) {
@@ -28,7 +19,6 @@ function VideoFooter({ reelId, channel, song, likes,
     function handleNotebookCreateClick(value, event) {
         if (notebooksList.length) {
             const currentNotebook = notebooksList[0];
-            console.log('current notebook: ', currentNotebook);
             const requestBody = {};
             requestBody.post_id = reelId;
             if (currentNotebook.id) {
@@ -47,7 +37,6 @@ function VideoFooter({ reelId, channel, song, likes,
                 .then(response => response.json())
                 .then(data => {
                     setIsNotebookSearchVisible(!isNotebookSearchVisible);
-                    console.log('data is: ', data);
                 });
         }
     }
@@ -89,7 +78,7 @@ function VideoFooter({ reelId, channel, song, likes,
                             <div>
                                 <ul className="videoFooter__notebooks__list">
                                     {notebooksList.map(({ id, notebookName }) => (
-                                        <li className="videoFooter__notebooks__listItem">{notebookName}</li>
+                                        <li key={id} className="videoFooter__notebooks__listItem">{notebookName}</li>
                                     ))}
                                 </ul>
                                 <button className="videoFooter__notebooks__save" onClick={handleNotebookCreateClick}>Create Notebook</button>
@@ -131,7 +120,6 @@ function VideoFooter({ reelId, channel, song, likes,
                             fetch('http://localhost:3000/likes/update_likes', requestOptions)
                                 .then(response => response.json())
                                 .then(data => {
-                                    console.log('data is: ', data);
                                     setLikesValue(likesValue + 1);
                                 });
                         }

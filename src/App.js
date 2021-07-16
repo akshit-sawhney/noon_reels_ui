@@ -69,6 +69,7 @@ function Home() {
         {/* Container of app__videos(scrollable content) */}
         {reels.map(({ reelId, channel, avatarSrc, song, url, likes, shares }) => (
           <VideoCard
+            key={reelId}
             reelId={reelId}
             channel={channel}
             avatarSrc={avatarSrc}
@@ -119,6 +120,7 @@ function Search() {
       <div className="search__videos">
         {hashtagReels.map(({ reelId, channel, avatarSrc, song, url, likes, shares }) => (
           <VideoCard
+            key={reelId}
             reelId={reelId}
             channel={channel}
             avatarSrc={avatarSrc}
@@ -159,8 +161,7 @@ function Notebooks() {
       <div className="notebooks__top">
         <ul>
           {notebooksList.map(({ notebook_id, notebook_name }) => (
-            <button className="notebooks__button" onClick={(value, event) => {
-              console.log('hi: ', notebook_id);
+            <button key={notebook_id} className="notebooks__button" onClick={(value, event) => {
               const notebookReelsListLocal = [];
               fetch(`http://localhost:3000/list/reels_by_notebook?notebook_id=${notebook_id}`)
                 .then(res => res.json())
@@ -173,7 +174,6 @@ function Notebooks() {
                       shares: row.views
                     });
                   });
-                  console.log('here: ', notebookReelsListLocal);
                   setNotebookReelsList(notebookReelsListLocal);
                 },
                   (error) => { console.log('error: ', error) })
@@ -189,6 +189,7 @@ function Notebooks() {
       <div className="notebooks__videos">
         {notebookReelsList.map(({ reelId, channel, avatarSrc, song, url, likes, shares }) => (
           <VideoCard
+            key={reelId}
             reelId={reelId}
             channel={channel}
             avatarSrc={avatarSrc}
