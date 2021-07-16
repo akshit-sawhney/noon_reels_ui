@@ -46,8 +46,7 @@ function Home() {
         result.forEach(row => {
           reelsList.push({
             reelId: row.id,
-            url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-            // url: row.path,
+            url: row.path,
             likes: row.likes,
             shares: row.views
           });
@@ -95,8 +94,7 @@ function Search() {
         result.forEach(row => {
           hashtagReelsList.push({
             reelId: row.id,
-            url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-            // url: row.path,
+            url: row.path,
             likes: row.likes,
             shares: row.views
           });
@@ -164,18 +162,18 @@ function Notebooks() {
             <button onClick={(value, event) => {
               console.log('hi: ', notebook_id);
               const notebookReelsListLocal = [];
-              fetch("http://localhost:3000/notebooks/search?user_id=5555&notebook_name=Maths")
+              fetch(`http://localhost:3000/list/reels_by_notebook?notebook_id=${notebook_id}`)
                 .then(res => res.json())
                 .then((result) => {
                   result.forEach(row => {
                     notebookReelsListLocal.push({
                       reelId: row.id,
-                      url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-                      // url: row.path,
+                      url: row.path,
                       likes: row.likes,
                       shares: row.views
                     });
                   });
+                  console.log('here: ', notebookReelsListLocal);
                   setNotebookReelsList(notebookReelsListLocal);
                 },
                   (error) => { console.log('error: ', error) })
