@@ -109,3 +109,11 @@ html{
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.notebooks__button {
+  background: none;
+  color: white;
+  font-weight: bolder;
+  border: none;
+  border-left: 2px solid white;
+}

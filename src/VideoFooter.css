@@ -32,11 +32,6 @@
     justify-content: space-between;   
 }
 
-
-.videoFooter__notebooks__list {
-    background: white;
-}
-
 .videoFooter__actionsLeft > .MuiSvgIcon-root{
     padding: 0 10px;
 }
@@ -75,3 +70,31 @@
     color:white;
 }
 
+
+.notebookSearch__top{
+    position: absolute;
+    bottom: 20em;
+}
+
+.videoFooter__notebooks__list {
+    background: none;
+    font-size: large;
+    color: white;
+    font-weight: bolder;
+}
+
+.videoFooter__notebooks__listItem {
+    list-style: none;
+    margin-left: -2em;
+}
+
+.videoFooter__search {
+    border-bottom: 2px solid black;
+}
+
+.videoFooter__notebooks__save {
+    background: black;
+    color: white;
+    font-weight: bolder;
+    font-size: larger;
+}
