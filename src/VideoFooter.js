@@ -1,18 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchField from "react-search-field";
 import './VideoFooter.css'
-import { Avatar, Button } from '@material-ui/core';
-import MusicNoteIcon from '@material-ui/icons/MusicNote';
-import Ticker from "react-ticker";
 import BookmarkIcon from '@material-ui/icons/Bookmark';
-import ModeCommentIcon from '@material-ui/icons/ModeComment';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import SendIcon from '@material-ui/icons/Send';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import { findAllByDisplayValue } from '@testing-library/react';
-
-
 
 function VideoFooter({ reelId, channel, song, likes,
     shares, avatarSrc }) {
