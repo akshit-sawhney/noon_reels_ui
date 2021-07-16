@@ -28,7 +28,6 @@ function VideoFooter({ reelId, channel, song, likes,
     function handleNotebookCreateClick(value, event) {
         if (notebooksList.length) {
             const currentNotebook = notebooksList[0];
-            console.log('current notebook: ', currentNotebook);
             const requestBody = {};
             requestBody.post_id = reelId;
             if (currentNotebook.id) {
@@ -47,7 +46,6 @@ function VideoFooter({ reelId, channel, song, likes,
                 .then(response => response.json())
                 .then(data => {
                     setIsNotebookSearchVisible(!isNotebookSearchVisible);
-                    console.log('data is: ', data);
                 });
         }
     }
@@ -131,7 +129,6 @@ function VideoFooter({ reelId, channel, song, likes,
                             fetch('http://localhost:3000/likes/update_likes', requestOptions)
                                 .then(response => response.json())
                                 .then(data => {
-                                    console.log('data is: ', data);
                                     setLikesValue(likesValue + 1);
                                 });
                         }

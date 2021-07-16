@@ -160,7 +160,6 @@ function Notebooks() {
         <ul>
           {notebooksList.map(({ notebook_id, notebook_name }) => (
             <button className="notebooks__button" onClick={(value, event) => {
-              console.log('hi: ', notebook_id);
               const notebookReelsListLocal = [];
               fetch(`http://localhost:3000/list/reels_by_notebook?notebook_id=${notebook_id}`)
                 .then(res => res.json())
@@ -173,7 +172,6 @@ function Notebooks() {
                       shares: row.views
                     });
                   });
-                  console.log('here: ', notebookReelsListLocal);
                   setNotebookReelsList(notebookReelsListLocal);
                 },
                   (error) => { console.log('error: ', error) })
