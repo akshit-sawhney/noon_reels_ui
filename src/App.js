@@ -115,18 +115,18 @@ function Search() {
   return (
     <div className="search">
       <div className="search__top">
-      <SearchField
-        placeholder="Search..."
-        onChange={onChange}
-        searchText=""
-        classNames="test-class"
-      />
+        <SearchField
+          placeholder="Search..."
+          onChange={onChange}
+          searchText=""
+          classNames="test-class"
+        />
       </div>
       {/* image at the top logo     */}
       {/* Reels Text */}
 
       <div className="search__videos">
-      {hashtagReels.map(({ channel, avatarSrc, song, url, likes, shares }) => (
+        {hashtagReels.map(({ channel, avatarSrc, song, url, likes, shares }) => (
           <VideoCard
             channel={channel}
             avatarSrc={avatarSrc}
