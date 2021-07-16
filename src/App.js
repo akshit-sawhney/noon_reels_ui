@@ -159,7 +159,7 @@ function Notebooks() {
       <div className="notebooks__top">
         <ul>
           {notebooksList.map(({ notebook_id, notebook_name }) => (
-            <button onClick={(value, event) => {
+            <button className="notebooks__button" onClick={(value, event) => {
               console.log('hi: ', notebook_id);
               const notebookReelsListLocal = [];
               fetch(`http://localhost:3000/list/reels_by_notebook?notebook_id=${notebook_id}`)

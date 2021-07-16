@@ -76,23 +76,23 @@ function VideoFooter({ reelId, channel, song, likes,
     }
     return (
         <div className="videoFooter">
-            <div className="search__top">
+            <div className="notebookSearch__top">
                 {isNotebookSearchVisible === true ? (
                     <div>
                         <SearchField
                             placeholder="Search..."
                             onChange={onBookmarkTextChange}
                             searchText=""
-                            classNames="test-class"
+                            classNames="videoFooter__search"
                         />
                         {notebooksList.length ? (
                             <div>
                                 <ul className="videoFooter__notebooks__list">
                                     {notebooksList.map(({ id, notebookName }) => (
-                                        <li>{notebookName}</li>
+                                        <li className="videoFooter__notebooks__listItem">{notebookName}</li>
                                     ))}
                                 </ul>
-                                <button onClick={handleNotebookCreateClick}>Create Notebook</button>
+                                <button className="videoFooter__notebooks__save" onClick={handleNotebookCreateClick}>Create Notebook</button>
                             </div>
                         ) : (
                             <div />
