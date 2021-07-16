@@ -87,7 +87,7 @@ function VideoFooter({ reelId, channel, song, likes,
                             <div>
                                 <ul className="videoFooter__notebooks__list">
                                     {notebooksList.map(({ id, notebookName }) => (
-                                        <li className="videoFooter__notebooks__listItem">{notebookName}</li>
+                                        <li key={id} className="videoFooter__notebooks__listItem">{notebookName}</li>
                                     ))}
                                 </ul>
                                 <button className="videoFooter__notebooks__save" onClick={handleNotebookCreateClick}>Create Notebook</button>
