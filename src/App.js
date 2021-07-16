@@ -23,8 +23,8 @@ export default function App() {
           <Route path="/search">
             <Search />
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/notebooks">
+            <Notebooks />
           </Route>
           <Route path="/">
             <Home />
@@ -135,8 +135,74 @@ function Search() {
   )
 }
 
-function Users() {
-  return <h2>Users</h2>;
+function Notebooks() {
+  const [notebooksList, setNotebooksList] = useState([]);
+
+  const [notebookReelsList, setNotebookReelsList] = useState([]);
+
+  useEffect(() => {
+    const notebooksListLocal = [];
+    fetch("http://localhost:3000/notebooks/list?user_id=5555")
+      .then(res => res.json())
+      .then((result) => {
+        result.forEach(row => {
+          notebooksListLocal.push({
+            notebook_id: row.id,
+            notebook_name: row.notebook_name
+          });
+        });
+        setNotebooksList(notebooksListLocal);
+      },
+        (error) => { console.log('error: ', error) })
+  }, [])
+
+  return (
+    <div className="notebooks">
+      <div className="notebooks__top">
+        <ul>
+          {notebooksList.map(({ notebook_id, notebook_name }) => (
+            <button onClick={(value, event) => {
+              console.log('hi: ', notebook_id);
+              const notebookReelsListLocal = [];
+              fetch("http://localhost:3000/notebooks/search?user_id=5555&notebook_name=Maths")
+                .then(res => res.json())
+                .then((result) => {
+                  result.forEach(row => {
+                    notebookReelsListLocal.push({
+                      reelId: row.id,
+                      url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                      // url: row.path,
+                      likes: row.likes,
+                      shares: row.views
+                    });
+                  });
+                  setNotebookReelsList(notebookReelsListLocal);
+                },
+                  (error) => { console.log('error: ', error) })
+            }}>
+              {notebook_name}
+            </button>
+          ))}
+        </ul>
+      </div>
+      {/* image at the top logo     */}
+      {/* Reels Text */}
+
+      <div className="notebooks__videos">
+        {notebookReelsList.map(({ reelId, channel, avatarSrc, song, url, likes, shares }) => (
+          <VideoCard
+            reelId={reelId}
+            channel={channel}
+            avatarSrc={avatarSrc}
+            song={song}
+            url={url}
+            likes={likes}
+            shares={shares}
+          />
+        ))}
+      </div>
+    </div>
+  )
 }
 
 // export default App;
