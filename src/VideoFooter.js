@@ -6,6 +6,7 @@ import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import Ticker from "react-ticker";
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import ModeCommentIcon from '@material-ui/icons/ModeComment';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SendIcon from '@material-ui/icons/Send';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -18,6 +19,7 @@ function VideoFooter({ reelId, channel, song, likes,
     const [isNotebookSearchVisible, setIsNotebookSearchVisible] = useState(false);
     const [notebooksList, setNotebooksList] = useState([]);
     const [searchTextValue, setSearchTextValue] = useState("");
+    const [likesValue, setLikesValue] = useState(likes);
 
     function onBookmarkClick(a, b) {
         setIsNotebookSearchVisible(!isNotebookSearchVisible);
@@ -29,7 +31,7 @@ function VideoFooter({ reelId, channel, song, likes,
             console.log('current notebook: ', currentNotebook);
             const requestBody = {};
             requestBody.post_id = reelId;
-            if(currentNotebook.id) {
+            if (currentNotebook.id) {
                 requestBody.notebook_id = currentNotebook.id
             } else {
                 requestBody.user_id = "5555";
@@ -116,11 +118,29 @@ function VideoFooter({ reelId, channel, song, likes,
                 </div>
                 <div className="videoFooter__actionsRight">
                     <div className="videoFooter__stat">
-                        <FavoriteIcon />
-                        <p>{likes}</p>
+                        <FavoriteIcon onClick={(value, event) => {
+                            const requestBody = {
+                                reel_id: reelId,
+                                likes: (likesValue + 1)
+                            }
+                            const requestOptions = {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(requestBody)
+                            };
+                            fetch('http://localhost:3000/likes/update_likes', requestOptions)
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log('data is: ', data);
+                                    setLikesValue(likesValue + 1);
+                                });
+                        }
+                        } />
+                        <p>{likesValue}</p>
                     </div>
                     <div className="videoFooter__stat">
-                        <ModeCommentIcon />
+                        {/* <ModeCommentIcon /> */}
+                        <VisibilityIcon />
                         <p>{shares}</p>
                     </div>
                 </div>
